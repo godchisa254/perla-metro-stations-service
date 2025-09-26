@@ -1,22 +1,21 @@
-# Stage 1: Build the application
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Stage 1: Build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Copy the .csproj file and restore dependencies
-COPY *.csproj .
+# Copy solution and project files
+COPY *.sln ./
+COPY perla-metro-stations-service/*.csproj perla-metro-stations-service/
 RUN dotnet restore
 
-# Copy the rest of the application files and build the project
+# Copy everything else and publish
 COPY . .
-RUN dotnet publish -c Release -o /app --no-restore
+RUN dotnet publish -c Release -o /out --no-restore
 
-# Stage 2: Serve the application
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+# Stage 2: Runtime
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
 WORKDIR /app
-EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:8080
 
-# Copy the published output from the build stage
-COPY --from=build /app .
+COPY --from=build /out .
 
-# Set the entry point to run the application
 ENTRYPOINT ["dotnet", "perla-metro-stations-service.dll"]

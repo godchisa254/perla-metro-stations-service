@@ -3,7 +3,8 @@ using perla_metro_stations_service.src.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi(); 
+builder.Configuration.AddEnvironmentVariables();
+builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -18,7 +19,7 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<ApplicationDBContext>();
     context.Database.EnsureCreated();
     SeedData.Initialize(context);
-} 
+}
 
 if (app.Environment.IsDevelopment())
 {
@@ -26,7 +27,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
- 
+
 
 app.Run();
- 
+
