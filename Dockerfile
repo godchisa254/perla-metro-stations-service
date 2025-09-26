@@ -4,7 +4,7 @@ WORKDIR /src
 
 # Copy solution and project files
 COPY *.sln ./
-COPY perla-metro-stations-service/*.csproj perla-metro-stations-service/
+COPY *.csproj ./
 RUN dotnet restore
 
 # Copy everything else and publish
