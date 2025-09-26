@@ -1,6 +1,6 @@
-bin\
-obj\
-Properties\
-.vscode\
-.git\
+bin/
+obj/
+Properties/
+.vscode/
+.git/
 .gitignore
