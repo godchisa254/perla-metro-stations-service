@@ -49,7 +49,7 @@ namespace perla_metro_stations_service.src.Controller
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
             if (!ModelState.IsValid)
@@ -86,7 +86,7 @@ namespace perla_metro_stations_service.src.Controller
             return CreatedAtAction(nameof(GetById), new { id = stationDto.Id }, stationDto);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:guid}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateStation updateStation)
         {
             if (!ModelState.IsValid)
@@ -111,7 +111,7 @@ namespace perla_metro_stations_service.src.Controller
             return Ok(stationDto);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
