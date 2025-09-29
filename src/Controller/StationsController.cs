@@ -18,7 +18,6 @@ namespace perla_metro_stations_service.src.Controller
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll([FromQuery] StationQuery query)
         {
             if (!ModelState.IsValid)
@@ -112,7 +111,6 @@ namespace perla_metro_stations_service.src.Controller
         }
 
         [HttpDelete("{id:guid}")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             if (!ModelState.IsValid)
