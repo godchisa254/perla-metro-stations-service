@@ -126,7 +126,7 @@ docker run -d -p 8080:8080 \
 
 * Authorization is handled via **Main API** (JWT tokens).
 * Soft delete is implemented via the `IsActive` flag.
-* Designed to integrate with other metro services (Users, Main API, etc.).
+* Designed to integrate with other metro services (Users and Main API).
 
 ---
 
